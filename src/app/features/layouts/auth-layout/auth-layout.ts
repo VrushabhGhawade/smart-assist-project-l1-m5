@@ -3,10 +3,11 @@ import { Router } from '@angular/router';
 import { Auth } from '../../../core/services/auth';
 import { Login } from '../../auth/login/login';
 import { Header } from '../../../shared/components/header/header';
+import { Footer } from '../../../shared/components/footer/footer';
 
 @Component({
   selector: 'app-auth-layout',
-  imports: [Login,Header],
+  imports: [Login,Header,Footer],
   templateUrl: './auth-layout.html',
   styleUrl: './auth-layout.scss',
 })

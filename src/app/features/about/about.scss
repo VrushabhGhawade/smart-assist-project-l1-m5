@@ -1,0 +1,102 @@
+/* Page background */
+.manual-container {
+  min-height: 100vh;
+  padding: 24px;
+  background-color: #f4f6f8;
+  box-sizing: border-box;
+}
+
+/* Main card */
+.manual-card {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+/* Title */
+.manual-card h1 {
+  margin-bottom: 4px;
+  font-weight: 600;
+}
+
+/* Subtitle */
+.subtitle {
+  color: #666;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* Section spacing */
+section {
+  margin-top: 24px;
+}
+
+/* Section headings */
+section h2 {
+  margin-bottom: 8px;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+/* Sub-headings */
+section h3 {
+  margin-top: 12px;
+  margin-bottom: 6px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Lists */
+ul {
+  padding-left: 20px;
+  margin-top: 8px;
+}
+
+ul li {
+  margin-bottom: 6px;
+}
+
+/* Code blocks */
+pre {
+  background-color: #eef1f4;
+  padding: 12px;
+  border-radius: 4px;
+  font-size: 13px;
+  overflow-x: auto;
+}
+
+/* Inline code */
+code {
+  background-color: #eef1f4;
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 13px;
+}
+
+/* Divider spacing */
+mat-divider {
+  margin: 24px 0;
+}
+
+/* Footer note */
+.footer-note {
+  text-align: center;
+  font-size: 12px;
+  color: #777;
+  margin-top: 16px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .manual-container {
+    padding: 12px;
+  }
+
+  .manual-card {
+    padding: 16px;
+  }
+
+  section h2 {
+    font-size: 18px;
+  }
+}
