@@ -1,41 +1,68 @@
 <div class="dashboard-container">
 
+  <!-- Welcome Card -->
   <mat-card class="welcome-card">
     <mat-card-title>
       Welcome, {{ userName }} 👋
     </mat-card-title>
-
     <mat-card-content>
-      <p>
-        This is the main User Dashboard page of the Smart Assist application.
-      </p>
-      <p>
-        You are learning Angular basics in L1 – Module 2.
-      </p>
+      <p>This is the main User Dashboard page of the Smart Assist application.</p>
+      <p>You are learning Angular basics in L1 – Module 3.</p>
     </mat-card-content>
   </mat-card>
 
-  <div class="cards">
-    <mat-card class="info-card">
-      <mat-card-title>Angular Basics</mat-card-title>
-      <mat-card-content>
-        Components, Routing, Data Binding
-      </mat-card-content>
-    </mat-card>
+  <!-- Tickets Table -->
+  <mat-card class="ticket-card">
+    <mat-card-title>My Tickets</mat-card-title>
 
-    <mat-card class="info-card">
-      <mat-card-title>UI</mat-card-title>
-      <mat-card-content>
-        Angular Material & Responsive Design
-      </mat-card-content>
-    </mat-card>
+    <table mat-table [dataSource]="userTickets" class="mat-elevation-z1">
 
-    <mat-card class="info-card">
-      <mat-card-title>Project</mat-card-title>
-      <mat-card-content>
-        Smart Assist Learning App
-      </mat-card-content>
-    </mat-card>
-  </div>
+      <!-- Ticket ID -->
+      <ng-container matColumnDef="ticketId">
+        <th mat-header-cell *matHeaderCellDef> Ticket Id </th>
+        <td mat-cell *matCellDef="let ticket"> {{ ticket.ticketId }} </td>
+      </ng-container>
+
+      <!-- Description -->
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef> Description </th>
+        <td mat-cell *matCellDef="let ticket"> {{ ticket.description }} </td>
+      </ng-container>
+
+      <!-- Priority -->
+      <ng-container matColumnDef="priority">
+        <th mat-header-cell *matHeaderCellDef> Priority </th>
+        <td mat-cell *matCellDef="let ticket"> {{ ticket.priority }} </td>
+      </ng-container>
+
+      <!-- Status -->
+      <ng-container matColumnDef="status">
+        <th mat-header-cell *matHeaderCellDef> Status </th>
+        <td mat-cell *matCellDef="let ticket"> {{ ticket.status }} </td>
+      </ng-container>
+
+      <!-- Age -->
+      <ng-container matColumnDef="age">
+        <th mat-header-cell *matHeaderCellDef> Age </th>
+        <td mat-cell *matCellDef="let ticket"> {{ ticket.age }} </td>
+      </ng-container>
+
+      <!-- Assignee -->
+      <ng-container matColumnDef="assignee">
+        <th mat-header-cell *matHeaderCellDef> Assignee </th>
+        <td mat-cell *matCellDef="let ticket">
+          {{ getAssigneeName(ticket.assignedToUserId) }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    </table>
+
+    <p *ngIf="userTickets.length === 0" class="no-data">
+      No tickets found for this user.
+    </p>
+  </mat-card>
 
 </div>
