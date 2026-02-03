@@ -1,54 +1,86 @@
 <div class="manual-container">
 
-    <mat-card class="manual-card">
+  <mat-card class="manual-card">
 
-        <!-- Title -->
-        <h1>Technical Skills Learned – L1M3</h1>
-        <mat-divider></mat-divider>
-        <!-- Technical Details Learnt -->
-        <section>
-            <ul>
-              
-                <li>Implemented a <b>mock authentication service</b> with user roles</li>
-                <li>Structured the application using <b>enterprise-ready folder organization</b></li>
-                <li>Built a complete <b>login-to-dashboard user flow</b> with different dashboards for different user roles</li>
-                <li>
-                    Worked with <b>JSON & Data Binding</b>:
-                    <ul>
-                        <li>Handling JSON Data</li>
-                        <li>Creating Mock Data</li>
-                    </ul>
-                </li>
-                <li>
-                    Used <b>Structural Directives</b>:
-                    <ul>
-                        <li>@ if, @ else</li>
-                        <li>@ switch, @ case, @ default</li>
-                        <li>@ for, @ empty</li>
-                    </ul>
-                </li>
-                <li>
-                    Used <b>Attribute Directives</b>:
-                    <ul>
-                        <li>[ngStyle], [ngClass]</li>
-                    </ul>
-                </li>
-                <li>
-                    Created <b>Custom Directives</b> using:
-                     <ul>
-                        <li>@HostBinding, @HostListener, ElementRef</li>
-                    </ul>
-                </li>
-                <li>
-                    Implemented <b>Angular Pipes</b>:
-                    <ul>
-                        <li>Built-in Pipes (currency, date, json, etc.)</li>
-                        <li>Pure & Impure Pipes</li>
-                        <li>Custom Pipes</li>
-                    </ul>
-                </li>
-            </ul>
-        </section>
-    </mat-card>
+    <!-- Title -->
+    <h1>Technical Skills Learned – L1M4</h1>
+    <mat-divider></mat-divider>
+
+    <section>
+      <ul>
+
+        <!-- Lifecycle Hooks -->
+        <li>
+          Implemented <b>Angular Lifecycle Hooks</b>:
+          <ul>
+            <li>Loaded user and ticket data in <b>ngOnInit</b></li>
+            <li>Accessed Material Dialogs in <b>ngAfterViewInit</b></li>
+            <li>Cleaned subscriptions using <b>ngOnDestroy</b></li>
+            <li>Proper subscription management to avoid memory leaks</li>
+          </ul>
+        </li>
+
+        <!-- Services & DI -->
+        <li>
+          Built <b>Service-Based Architecture using Dependency Injection</b>:
+          <ul>
+            <li>UserService</li>
+            <li>TicketService</li>
+            <li>MenuService</li>
+            <li>FilterStateService</li>
+            <li>Moved business logic from components to services</li>
+            <li>Components only consume Observables (thin components)</li>
+          </ul>
+        </li>
+
+        <!-- Observables -->
+        <li>
+          Used <b>RxJS Observables for Reactive Programming</b>:
+          <ul>
+            <li>Users → Observable&lt;User&gt;</li>
+            <li>Tickets → Observable&lt;Ticket[]&gt;</li>
+            <li>Filters → Observable&lt;FilterState&gt;</li>
+            <li>Async pipe for automatic subscription handling</li>
+          </ul>
+        </li>
+
+        <!-- Operators -->
+        <li>
+          Applied <b>RxJS Operators</b>:
+          <ul>
+            <li><b>map</b> – transform and filter ticket data</li>
+            <li><b>filter</b> – filter tickets by status</li>
+            <li><b>scan</b> – compute ticket counts</li>
+            <li><b>switchMap</b> – reload data on role/filter change</li>
+          </ul>
+        </li>
+
+        <!-- Architecture -->
+        <li>
+          Followed <b>Reactive & Clean Architecture Principles</b>:
+          <ul>
+            <li>No nested subscriptions</li>
+            <li>No business logic inside components</li>
+            <li>Used BehaviorSubject for shared state</li>
+            <li>Centralized data management in services</li>
+            <li>Fully reactive UI updates</li>
+          </ul>
+        </li>
+
+        <!-- Material Integration -->
+        <li>
+          Integrated <b>Angular Material Components</b>:
+          <ul>
+            <li>MatTable with reactive data</li>
+            <li>MatDialog for feedback submission</li>
+            <li>MatChips for filtering</li>
+            <li>MatPaginator with reactive pagination</li>
+          </ul>
+        </li>
+
+      </ul>
+    </section>
+
+  </mat-card>
 
 </div>

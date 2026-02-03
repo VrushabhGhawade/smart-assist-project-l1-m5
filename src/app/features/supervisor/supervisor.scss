@@ -1,0 +1,45 @@
+.dashboard-container {
+  padding: 20px;
+  min-height: 80vh;
+}
+
+.welcome-card {
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.info-card {
+  text-align: center;
+}
+.ticket-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.ticket-table td,
+.ticket-table th {
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.row-hover {
+  background-color: #f3f4f6;
+  cursor: pointer;
+}
+
+.row-selected {
+  background-color: #dbeafe;
+  font-weight: 500;
+}
+
+.no-data {
+  text-align: center;
+  padding: 20px;
+}
+

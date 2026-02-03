@@ -1,28 +1,28 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ActivatedRoute } from '@angular/router';
 import { MockData } from '../../assets/mock-data';
-import { MatTableModule } from '@angular/material/table';
-import { InteractiveRow } from '../../shared/directive/interactive-row';
-import { TicketStatusPipe } from '../../shared/pipes/ticket-status-pipe';
-import { Ticket, TicketPriority, TicketStatus } from '../../core/models/ticket.model';
-import { AssignTicketDialog } from './assign-ticket-dialog/assign-ticket-dialog';
 import { MatDialog } from '@angular/material/dialog';
+import { Ticket, TicketPriority, TicketStatus } from '../../core/models/ticket.model';
+import { AssignTicketDialog } from '../support-engineer/assign-ticket-dialog/assign-ticket-dialog';
+import { CommonModule } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
 
 @Component({
-  selector: 'app-support-engineer',
-  imports: [MatToolbarModule, MatCardModule, MatTableModule, CommonModule, InteractiveRow, TicketStatusPipe, MatButtonModule,
+  selector: 'app-supervisor',
+  imports: [MatToolbarModule,
+    MatCardModule,
+    MatButtonModule,
+    CommonModule,
     MatChipsModule,
     MatIconModule],
-  templateUrl: './support-engineer.html',
-  styleUrl: './support-engineer.scss',
+  templateUrl: './supervisor.html',
+  styleUrl: './supervisor.scss',
 })
-export class SupportEngineer {
+export class Supervisor {
   userName: string = '';
   userId: string = '';
   userTickets: Ticket[] = [];
@@ -38,9 +38,7 @@ export class SupportEngineer {
       this.userId = params['id'];
     });
     this.userName = MockData.users.find(u => u.userId === this.userId)?.name || '';
-    this.userTickets = MockData.tickets.filter(
-      t => t.createdByUserId === this.userId
-    );
+    this.userTickets = MockData.tickets;
     this.filteredTickets = this.userTickets;
   }
   getAssigneeName(assigneeId?: string): string {
@@ -56,6 +54,9 @@ export class SupportEngineer {
       }
     }).afterClosed().subscribe(result => {
       if (result) {
+        this.userTickets = this.userTickets.map(t =>
+          t.ticketId === ticket.ticketId ? { ...t, assignedToUserId: result.assignee } : t
+        );
         console.log('Assigned To:', result.assignee);
         console.log('Comment:', result.comment);
       }
@@ -63,25 +64,24 @@ export class SupportEngineer {
 
   }
 
-  applyFilter(tickets: Ticket[], filter: string): Ticket[] {
-    switch (filter) {
-      case 'OPEN':
-        return tickets.filter(t => t.status === TicketStatus.Open);
-
-      case 'IN_PROGRESS':
-        return tickets.filter(t => t.status === TicketStatus.In_Progress);
-
-      case 'RESOLVED':
-        return tickets.filter(t => t.status === TicketStatus.Resolved);
-      default:
-        return tickets;
+    applyFilter(tickets: Ticket[], filter: string): Ticket[] {
+      switch (filter) {
+        case 'OPEN':
+          return tickets.filter(t => t.status === TicketStatus.Open);
+  
+        case 'IN_PROGRESS':
+          return tickets.filter(t => t.status === TicketStatus.In_Progress);
+  
+        case 'RESOLVED':
+          return tickets.filter(t => t.status === TicketStatus.Resolved);
+        default:
+          return tickets;
+      }
     }
-  }
-
-  onFilterChange(filter: string) {
-    this.selectedFilter = filter;
-
-    this.filteredTickets = this.applyFilter(this.userTickets, filter);
-  }
-
+  
+    onFilterChange(filter: string) {
+      this.selectedFilter = filter;
+  
+      this.filteredTickets = this.applyFilter(this.userTickets, filter);
+    }
 }

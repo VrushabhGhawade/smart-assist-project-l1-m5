@@ -19,5 +19,7 @@ export interface Ticket {
   createdAt: string;
   age: number;
   assignedToUserId?: string;
+  rating: number;
+  feedback: string;
 }
 

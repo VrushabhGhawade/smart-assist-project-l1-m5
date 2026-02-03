@@ -1,0 +1,43 @@
+.dialog-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+
+.close-btn {
+  margin-right: -8px;
+}
+
+.dialog-content {
+  padding-top: 8px;
+}
+
+.rating-section {
+  margin-bottom: 16px;
+}
+
+.rating-label {
+  font-size: 14px;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.stars mat-icon {
+  cursor: pointer;
+  color: #cfd8dc;
+  font-size: 22px;
+}
+
+.stars mat-icon.active {
+  color: #1976d2;
+}
+
+.feedback-field {
+  width: 100%;
+}
+
+.save-btn {
+  width: 100px;
+}

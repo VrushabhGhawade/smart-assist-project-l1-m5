@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="dialog-title">
+  Feedback
+  <button mat-icon-button class="close-btn" (click)="onClose()">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+
+<mat-dialog-content class="dialog-content">
+  <div class="rating-section">
+    <label class="rating-label">* Rating</label>
+    <div class="stars">
+      <mat-icon
+        *ngFor="let star of stars; let i = index"
+        (click)="setRating(i + 1)"
+        [class.active]="i < rating">
+        star
+      </mat-icon>
+    </div>
+  </div>
+
+  <mat-form-field appearance="outline" class="feedback-field">
+    <mat-label>Feedback</mat-label>
+    <textarea matInput rows="4" [(ngModel)]="feedback"></textarea>
+  </mat-form-field>
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" class="save-btn" (click)="save()">
+    Save
+  </button>
+</mat-dialog-actions>

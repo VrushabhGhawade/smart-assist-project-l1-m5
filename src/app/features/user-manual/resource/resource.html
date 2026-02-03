@@ -2,7 +2,7 @@
     <mat-card class="manual-card">
 
         <!-- Title -->
-        <h1>Project Folder Structure – L1M3</h1>
+        <h1>Project Folder Structure – L1M4</h1>
         <mat-divider></mat-divider>
         <!-- Project Structure -->
         <section>
@@ -18,7 +18,10 @@ src/
      │   ├── components/
      │   │   ├── header/
      │   │   └── footer/
-     │   └── services/
+     │   ├── services/
+     │   │   ├── ticket.service.ts/
+     │   │   └── user.service.ts/
+     │   └── models/
      │
      ├── features/
      │   ├── auth/
@@ -26,6 +29,7 @@ src/
      │   ├── admin/
      │   ├── support-engineer/
      │   ├── user/
+     │   │   └── my-ticket/
      │   └── user-manual/
      │
      ├── layouts/
@@ -42,6 +46,30 @@ src/
                 <li><b>Features</b>: Business modules such as Login, Admin, Support Engineer, User and User Manual</li>
                 <li><b>Layouts</b>: Separate layouts for authentication and main app</li>
                 <li><b>Routing</b>: Centralized route configuration in app.routes.ts</li>
+            </ul>
+        </section>
+
+        <!-- External Resources -->
+        <section>
+            <h2>External Resources</h2>
+            <mat-divider></mat-divider>
+            <ul>
+                <li>
+                    <a href="https://angular.io/docs" target="_blank" rel="noopener noreferrer">
+                        Angular Documentation
+                    </a>
+                </li>
+                <li>
+                    <a href="https://material.angular.io/components/categories" target="_blank"
+                        rel="noopener noreferrer">
+                        Angular Material Components
+                    </a>
+                </li>
+                <li>
+                    <a href="https://rxjs.dev/guide/overview" target="_blank" rel="noopener noreferrer">
+                        RxJS Documentation
+                    </a>
+                </li>
             </ul>
         </section>
 

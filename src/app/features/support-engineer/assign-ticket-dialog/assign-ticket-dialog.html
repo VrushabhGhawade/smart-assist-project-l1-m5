@@ -1,0 +1,39 @@
+<h2 mat-dialog-title class="dialog-title">
+  Assign Ticket
+  <button mat-icon-button (click)="close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</h2>
+
+<mat-dialog-content class="dialog-content">
+
+  <!-- Assignee -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Assign To</mat-label>
+    <mat-select [(ngModel)]="assignee">
+      <mat-option *ngFor="let assignee of listOfAssignees" [value]="assignee.userId">
+        {{ assignee.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <!-- Comment -->
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Any Comment</mat-label>
+    <textarea
+      matInput
+      rows="4"
+      [(ngModel)]="comment">
+    </textarea>
+  </mat-form-field>
+
+</mat-dialog-content>
+
+<mat-dialog-actions align="center">
+  <button mat-raised-button color="primary" (click)="assign()">
+    Assign
+  </button>
+  <button mat-raised-button color="warn" (click)="close()">
+    Cancel
+  </button>
+</mat-dialog-actions>
