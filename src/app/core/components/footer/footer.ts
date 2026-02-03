@@ -15,19 +15,19 @@ export class Footer {
   constructor(private router: Router) { }
   onUserManual() {
     window.open(
-      '/smart-assist-project-l1-m3/#/user-manual',
+      '/smart-assist-project-l1-m4/#/user-manual',
       '_blank'
     );
   }
   onTechnicalDetails() {
     window.open(
-      '/smart-assist-project-l1-m3/#/technical-details-learnt',
+      '/smart-assist-project-l1-m4/#/technical-details-learnt',
       '_blank'
     );
   }
 onUsefulResources() {
     window.open(
-      '/smart-assist-project-l1-m3/#/resource',
+      '/smart-assist-project-l1-m4/#/resource',
       '_blank'
     );
   }
