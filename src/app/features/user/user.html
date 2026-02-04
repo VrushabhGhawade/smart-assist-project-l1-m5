@@ -6,9 +6,9 @@
       Welcome, {{ userName }} 👋
     </mat-card-title>
   </mat-card>
-  @if (filteredTickets$ | async; as tickets) {
+  @if (userTickets$ | async; as tickets) {
   @if (getFeedbackPendingCount(tickets) > 0) {
-  <mat-card class="welcome-card">
+  <mat-card class="feedback-card">
     <mat-card-title>
       <mat-icon>warning</mat-icon> Feedback awaited
     </mat-card-title>
@@ -18,10 +18,8 @@
   <!-- Filter Chips -->
   <div class="filter-bar">
     <mat-chip-listbox #chipList (click)="onFilterChange(chipList.value)">
-      <mat-chip-option value="ALL" selected>All</mat-chip-option>
       <mat-chip-option value="OPEN">Open</mat-chip-option>
-      <mat-chip-option value="IN_PROGRESS">In Progress</mat-chip-option>
-      <mat-chip-option value="RESOLVED">Resolved</mat-chip-option>
+      <mat-chip-option value="CLOSED">Closed</mat-chip-option>
     </mat-chip-listbox>
   </div>
 
@@ -30,13 +28,6 @@
     <mat-card-title>My Tickets</mat-card-title>
     @if (filteredTickets$ | async; as tickets) {
     <table mat-table [dataSource]="tickets" class="mat-elevation-z1">
-
-
-      <!-- Ticket ID -->
-      <ng-container matColumnDef="ticketId">
-        <th mat-header-cell *matHeaderCellDef> Ticket Id </th>
-        <td mat-cell *matCellDef="let ticket"> {{ ticket.ticketId }} </td>
-      </ng-container>
 
       <!-- Description -->
       <ng-container matColumnDef="description">
@@ -60,30 +51,43 @@
         <th mat-header-cell *matHeaderCellDef> Status </th>
         <td mat-cell *matCellDef="let ticket"> {{ ticketStatus[ticket.status] | ticketStatus }} </td>
       </ng-container>
-      <!-- Created At -->
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef> Created At </th>
-        <td mat-cell *matCellDef="let ticket"> {{ ticket.createdAt | date:'medium' }} </td>
-      </ng-container>
 
       <!-- Age -->
       <ng-container matColumnDef="age">
         <th mat-header-cell *matHeaderCellDef> Age </th>
-        <td mat-cell *matCellDef="let ticket"> {{ ticket.age }} </td>
+        <td mat-cell *matCellDef="let ticket"> {{ ticket.createdAt | age }} </td>
       </ng-container>
 
       <!-- Assignee -->
       <ng-container matColumnDef="assignee">
         <th mat-header-cell *matHeaderCellDef> Assignee </th>
         <td mat-cell *matCellDef="let ticket">
-          {{ getAssigneeName(ticket.assignedToUserId) }}
+          {{ ticket.assignedToName}}
         </td>
       </ng-container>
       <!-- action -->
       <ng-container matColumnDef="action">
-        <th mat-header-cell *matHeaderCellDef> Action </th>
+        <th mat-header-cell *matHeaderCellDef> Rating </th>
         <td mat-cell *matCellDef="let ticket">
-          <button mat-button color="primary" (click)="viewTicketDetails(ticket)">View Details</button>
+          @if (ticket.status === ticketStatus.Resolved && !ticket.rating) {
+          <button mat-button color="primary" (click)="viewTicketDetails(ticket)">
+            <mat-icon>warning</mat-icon>
+            awaited feedback
+          </button>
+          }
+          @if(ticket.rating || ticket.feedback) {
+          <span class="rating-section">
+            @for (item of stars; track $index) {
+            <mat-icon [class.active]="$index < ticket.rating">
+              star
+            </mat-icon>
+            }
+          </span>
+
+          @if (ticket.feedback) {
+          <mat-icon [matTooltip]="ticket.feedback" color="primary">comment</mat-icon>
+          }
+          }
         </td>
       </ng-container>
 

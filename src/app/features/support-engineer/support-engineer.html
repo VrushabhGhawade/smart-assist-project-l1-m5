@@ -11,10 +11,10 @@
   </mat-card>
  <div class="filter-bar">
     <mat-chip-listbox #chipList (click)="onFilterChange(chipList.value)">
-      <mat-chip-option value="ALL" selected>All</mat-chip-option>
       <mat-chip-option value="OPEN">Open</mat-chip-option>
-      <mat-chip-option value="IN_PROGRESS">In Progress</mat-chip-option>
-      <mat-chip-option value="RESOLVED">Resolved</mat-chip-option>
+      <mat-chip-option value="CLOSED">Closed</mat-chip-option>
+      <mat-chip-option value="NEW">New Assignment</mat-chip-option>
+
     </mat-chip-listbox>
   </div>
   <!-- Tickets Table -->
@@ -40,8 +40,8 @@
             <td>{{ ticket.ticketId }}</td>
             <td>{{ ticket.description }}</td>
             <td>{{ ticketStatus[ticket.status] }}</td>
-            <td>{{ ticket.age }}</td>
-            <td>{{ ticket.assignedToUserId }}</td>
+            <td>{{ ticket.createdAt | age}}</td>
+            <td>{{ ticket.createdByName }}</td>
             <td>{{ ticket.rating || '' }}</td>
 
             <td>

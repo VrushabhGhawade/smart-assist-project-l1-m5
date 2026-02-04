@@ -5,7 +5,7 @@ export enum TicketPriority {
 }
 
 export enum TicketStatus {
-  Open = 1,
+  New = 1,
   In_Progress = 2,
   Resolved = 3,
   Closed = 4
@@ -13,12 +13,13 @@ export enum TicketStatus {
 export interface Ticket {
   ticketId: number;
   createdByUserId: string;
+  createdByName: string;
   description: string;
   priority: TicketPriority;
   status: TicketStatus;
   createdAt: string;
-  age: number;
   assignedToUserId?: string;
+  assignedToName?: string;
   rating: number;
   feedback: string;
 }

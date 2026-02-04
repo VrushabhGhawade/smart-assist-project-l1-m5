@@ -8,6 +8,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { Router } from '@angular/router';
 import { MockData } from '../../../assets/mock-data';
+import { Role } from '../../../core/models/user.model';
 @Component({
   selector: 'app-login',
   imports: [FormsModule,
@@ -35,7 +36,7 @@ export class Login {
     }
     switch (user.role) {
 
-      case 'ADMIN':
+      case Role.SUPERVISOR:
         this.router.navigate(['/admin'], {
           queryParams: {
             role: user.role,
@@ -44,7 +45,7 @@ export class Login {
         });
         break;
 
-      case 'SUPPORT_ENGINEER':
+      case Role.SUPPORT_ENGINEER:
         this.router.navigate(['/support'], {
           queryParams: {
             role: user.role,
@@ -53,7 +54,7 @@ export class Login {
         });
         break;
 
-      case 'USER':
+      case Role.USER:
         this.router.navigate(['/user'], {
           queryParams: {
             role: user.role,

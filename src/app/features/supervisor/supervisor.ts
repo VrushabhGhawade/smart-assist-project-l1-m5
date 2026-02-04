@@ -10,6 +10,7 @@ import { AssignTicketDialog } from '../support-engineer/assign-ticket-dialog/ass
 import { CommonModule } from '@angular/common';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { AgePipePipe } from '../../shared/pipes/age-pipe-pipe';
 
 @Component({
   selector: 'app-supervisor',
@@ -18,7 +19,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatButtonModule,
     CommonModule,
     MatChipsModule,
-    MatIconModule],
+    MatIconModule,
+    AgePipePipe],
   templateUrl: './supervisor.html',
   styleUrl: './supervisor.scss',
 })
@@ -64,24 +66,24 @@ export class Supervisor {
 
   }
 
-    applyFilter(tickets: Ticket[], filter: string): Ticket[] {
-      switch (filter) {
-        case 'OPEN':
-          return tickets.filter(t => t.status === TicketStatus.Open);
-  
-        case 'IN_PROGRESS':
-          return tickets.filter(t => t.status === TicketStatus.In_Progress);
-  
-        case 'RESOLVED':
-          return tickets.filter(t => t.status === TicketStatus.Resolved);
-        default:
-          return tickets;
-      }
+  applyFilter(tickets: Ticket[], filter: string): Ticket[] {
+    switch (filter) {
+      case 'OPEN':
+        return tickets.filter(t => t.status === TicketStatus.New);
+
+      case 'CLOSED':
+        return tickets.filter(t => t.status === TicketStatus.Closed);
+
+      case 'RESOLVED':
+        return tickets.filter(t => t.status === TicketStatus.Resolved);
+      default:
+        return tickets;
     }
-  
-    onFilterChange(filter: string) {
-      this.selectedFilter = filter;
-  
-      this.filteredTickets = this.applyFilter(this.userTickets, filter);
-    }
+  }
+
+  onFilterChange(filter: string) {
+    this.selectedFilter = filter;
+
+    this.filteredTickets = this.applyFilter(this.userTickets, filter);
+  }
 }

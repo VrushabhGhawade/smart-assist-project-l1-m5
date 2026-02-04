@@ -64,3 +64,23 @@
   color: #dc2626;
   /* red */
 }
+
+.feedback-card {
+  padding: 8px;
+
+  mat-icon {
+    color: orange;
+  }
+}
+
+.rating-section {
+
+  mat-icon {
+    color: #cfd8dc;
+  }
+
+  mat-icon.active {
+    color: #1976d2;
+  }
+ 
+}

@@ -10,7 +10,7 @@ import { Footer } from '../../../core/components/footer/footer';
   styleUrl: './auth-layout.scss',
 })
 export class AuthLayout {
-  version: string = 'L1-M3';
+  version: string = 'L1-M4';
   develop: string = 'Smart Assist Team';
   constructor(
     private router: Router

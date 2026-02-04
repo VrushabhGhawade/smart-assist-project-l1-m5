@@ -18,6 +18,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from "@angular/material/icon";
 import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
+import { AgePipePipe } from '../../shared/pipes/age-pipe-pipe';
+import { MatTooltip } from '@angular/material/tooltip';
 
 @Component({
   selector: 'app-user',
@@ -33,6 +35,8 @@ import { MatChipListboxChange, MatChipsModule } from '@angular/material/chips';
     MatChipsModule,
     MatIconModule,
     MatButtonModule,
+    AgePipePipe,
+    MatTooltip
   ],
   templateUrl: './user.html',
   styleUrl: './user.scss'
@@ -50,15 +54,14 @@ export class User implements OnInit, OnDestroy {
   ticketStatus = TicketStatus;
 
   displayedColumns: string[] = [
-    'ticketId',
     'description',
     'priority',
     'status',
-    'createdAt',
     'age',
     'assignee',
     'action'
   ];
+  stars = [1, 2, 3, 4, 5];
 
   private destroy$ = new Subject<void>();
 
@@ -73,14 +76,12 @@ export class User implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe(params => {
         this.userId = params['id'];
+        this.userName = MockData.users.find(u => u.userId === this.userId)?.name || '';
         this.userTickets$ = this.ticketService.getTicketsByUser(this.userId);
         this.filteredTickets$ = this.userTickets$; // Initialize with all tickets
       });
   }
-  getAssigneeName(assigneeId?: string): string {
-    if (!assigneeId) return '-';
-    return MockData.users.find(u => u.userId === assigneeId)?.name ?? '-';
-  }
+ 
 
   ngOnDestroy(): void {
     this.destroy$.next();
@@ -127,13 +128,16 @@ export class User implements OnInit, OnDestroy {
   applyFilter(tickets: Ticket[], filter: string): Ticket[] {
     switch (filter) {
       case 'OPEN':
-        return tickets.filter(t => t.status === TicketStatus.Open);
+        return tickets.filter(t => t.status === TicketStatus.New);
 
       case 'IN_PROGRESS':
         return tickets.filter(t => t.status === TicketStatus.In_Progress);
 
       case 'RESOLVED':
         return tickets.filter(t => t.status === TicketStatus.Resolved);
+        case'CLOSED':
+        return tickets.filter(t => t.status === TicketStatus.Closed);
+
       default:
         return tickets;
     }
@@ -150,8 +154,6 @@ export class User implements OnInit, OnDestroy {
   getFeedbackPendingCount(tickets: Ticket[]): number {
     return tickets.filter(t => t.status === TicketStatus.Resolved && !t.rating).length;
   }
-
-
 
 
 }

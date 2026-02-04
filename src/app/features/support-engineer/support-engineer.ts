@@ -13,11 +13,19 @@ import { AssignTicketDialog } from './assign-ticket-dialog/assign-ticket-dialog'
 import { MatDialog } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
+import { AgePipePipe } from '../../shared/pipes/age-pipe-pipe';
 
 @Component({
   selector: 'app-support-engineer',
-  imports: [MatToolbarModule, MatCardModule, MatTableModule, CommonModule, InteractiveRow, TicketStatusPipe, MatButtonModule,
+  imports: [MatToolbarModule,
+    MatCardModule,
+    MatTableModule,
+    CommonModule,
+    InteractiveRow,
+    TicketStatusPipe,
+    MatButtonModule,
     MatChipsModule,
+    AgePipePipe,
     MatIconModule],
   templateUrl: './support-engineer.html',
   styleUrl: './support-engineer.scss',
@@ -66,10 +74,10 @@ export class SupportEngineer {
   applyFilter(tickets: Ticket[], filter: string): Ticket[] {
     switch (filter) {
       case 'OPEN':
-        return tickets.filter(t => t.status === TicketStatus.Open);
+        return tickets.filter(t => t.status === TicketStatus.New);
 
-      case 'IN_PROGRESS':
-        return tickets.filter(t => t.status === TicketStatus.In_Progress);
+      case 'CLOSED':
+        return tickets.filter(t => t.status === TicketStatus.Closed);
 
       case 'RESOLVED':
         return tickets.filter(t => t.status === TicketStatus.Resolved);
