@@ -8,6 +8,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { PersistentAuthService } from '../../../core/services/persistent-auth';
 import { MockData } from '../../../assets/mock-data';
 import { AgePipePipe } from '../../../shared/pipes/age-pipe-pipe';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-support-engineer-ticket',
@@ -27,13 +28,21 @@ export class SupportEngineerTicket {
   ticketPriority = TicketPriority;
 
   tickets: Ticket[] = [];
-  constructor(private persistentAuthService: PersistentAuthService) {
+  constructor(private persistentAuthService: PersistentAuthService,
+    private router: Router
+  ) {
     this.tickets = MockData.tickets.filter(
       t => t.assignedToUserId === this.persistentAuthService.userDetails?.userId
     );
 
   }
+  getByUserName(userId: string): string {
+    const user = MockData.users.find(u => u.userId === userId);
+    return user ? user.name : '';
+  }
 
-
-
+  onTicketSelcted(ticketId: number) {
+    // Navigate to update the URL when a user selects from dropdown
+    this.router.navigate(['support/track-ticket', ticketId]);
+  }
 }

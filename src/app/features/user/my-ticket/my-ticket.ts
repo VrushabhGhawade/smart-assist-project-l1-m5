@@ -148,5 +148,8 @@ export class MyTicket implements OnInit, OnDestroy {
     // Navigate to update the URL when a user selects from dropdown
     this.router.navigate(['user/track-ticket', ticketId]);
   }
-
+  getByUserName(userId: string): string {
+    const user = MockData.users.find(u => u.userId === userId);
+    return user ? user.name : '';
+  }
 }

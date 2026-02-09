@@ -16,7 +16,7 @@ export enum TicketStatus {
 export interface Ticket {
   ticketId: number;
   createdByUserId: string;
-  createdByName: string;
+  createdByName?: string;
   description: string;
   priority: TicketPriority;
   status: TicketStatus;

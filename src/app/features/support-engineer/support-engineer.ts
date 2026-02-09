@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MockData } from '../../assets/mock-data';
 import { MatTableModule } from '@angular/material/table';
 import { InteractiveRow } from '../../shared/directive/interactive-row';
@@ -39,9 +39,10 @@ export class SupportEngineer {
   filteredTickets: Ticket[] = [];
   constructor(
     private persistentAuthService: PersistentAuthService,
+    private router:Router,
     private dialog: MatDialog
   ) {
-   
+
     this.userName = MockData.users.find(u => u.userId === persistentAuthService.userDetails?.userId)?.name || '';
     this.userTickets = MockData.tickets.filter(
       t => t.assignedToUserId === persistentAuthService.userDetails?.userId
@@ -88,5 +89,8 @@ export class SupportEngineer {
 
     this.filteredTickets = this.applyFilter(this.userTickets, filter);
   }
-
+  onTicketSelcted(ticketId: number) {
+    // Navigate to update the URL when a user selects from dropdown
+    this.router.navigate(['support/track-ticket', ticketId]);
+  }
 }

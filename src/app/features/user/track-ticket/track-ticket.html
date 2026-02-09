@@ -18,7 +18,7 @@
       @if (selectedTicket) {
         <div class="details-grid">
           <div class="detail-row"><strong>Id</strong>: {{ selectedTicket.ticketId }}</div>
-          <div class="detail-row"><strong>Created</strong>: {{ selectedTicket.createdByName }}</div>
+          <div class="detail-row"><strong>Created</strong>: {{ getByUserName(selectedTicket.createdByUserId) }}</div>
           <div class="detail-row">
             <strong>Status</strong>: 
             <span class="status-badge">{{ TicketStatus[selectedTicket.status] | ticketStatus }}</span>

@@ -1,12 +1,9 @@
 <div class="form-container">
-  <header>
-    <h1>Create Ticket</h1>
-    <p>Submit a new support ticket. Our team will respond at earliest.</p>
-  </header>
-
+  <app-title-header [header]="'Create Ticket'"
+    [subHeader]="'Submit a new support ticket. Our team will respond at earliest.'"></app-title-header>
   <mat-card class="create-card">
     <form [formGroup]="ticketForm" (ngSubmit)="onSubmit()">
-      
+
       <mat-form-field appearance="outline">
         <mat-label>Issue Title</mat-label>
         <input matInput formControlName="issueTitle" placeholder="Enter title">
@@ -21,7 +18,7 @@
         <mat-label>Priority</mat-label>
         <mat-select formControlName="priority">
           @for (p of priorities; track p) {
-            <mat-option [value]="p">{{TicketPriority[p]}}</mat-option>
+          <mat-option [value]="p">{{TicketPriority[p]}}</mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -30,7 +27,7 @@
         <mat-label>Category</mat-label>
         <mat-select formControlName="category">
           @for (cat of categories; track cat) {
-            <mat-option [value]="cat">{{ TicketCategory[cat] }}</mat-option>
+          <mat-option [value]="cat">{{ TicketCategory[cat] }}</mat-option>
           }
         </mat-select>
       </mat-form-field>
@@ -39,7 +36,7 @@
         <mat-label>Sub Category</mat-label>
         <mat-select formControlName="subCategory">
           @for (sub of availableSubCategories; track sub) {
-            <mat-option [value]="sub">{{ TicketSubCategory[sub] }}</mat-option>
+          <mat-option [value]="sub">{{ TicketSubCategory[sub] }}</mat-option>
           }
         </mat-select>
       </mat-form-field>

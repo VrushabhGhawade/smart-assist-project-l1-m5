@@ -13,6 +13,7 @@ import { CreateTicketRequest, SubCategories, TicketCategory, TicketPriority, Tic
 import { PersistentAuthService } from '../../../core/services/persistent-auth';
 import { Router } from '@angular/router';
 import { MockData } from '../../../assets/mock-data';
+import { TitleHeader } from '../../../shared/components/title-header/title-header';
 
 @Component({
   selector: 'app-create-ticket',
@@ -26,6 +27,7 @@ import { MockData } from '../../../assets/mock-data';
     CommonModule,
     TextFieldModule,
     MatOptionModule,
+    TitleHeader,
     ReactiveFormsModule],
   templateUrl: './create-ticket.html',
   styleUrl: './create-ticket.scss',

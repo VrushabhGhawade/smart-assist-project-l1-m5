@@ -9,8 +9,8 @@
       <!-- Here are your tickets and their statuses. -->
     </mat-card-content>
   </mat-card>
- <div class="filter-bar">
-   <mat-chip-listbox #chipList (click)="onFilterChange(chipList.value)">
+  <div class="filter-bar">
+    <mat-chip-listbox #chipList (click)="onFilterChange(chipList.value)">
       <mat-chip-option value="OPEN">Open</mat-chip-option>
       <mat-chip-option value="CLOSED">Closed</mat-chip-option>
       <mat-chip-option value="NEW">New Assignment</mat-chip-option>
@@ -24,11 +24,11 @@
       <table class="ticket-table">
         <thead>
           <tr>
-            <th>ID</th>
-            <th>Description</th>
+            <th>Ticket</th>
             <th>Status</th>
             <th>Age</th>
             <th>Created By</th>
+            <th>Assigned To</th>
             <th>Rating</th>
             <th>Action</th>
           </tr>
@@ -37,11 +37,14 @@
         <tbody>
           @for (ticket of filteredTickets; track ticket.ticketId) {
           <tr appInteractiveRow>
-            <td>{{ ticket.ticketId }}</td>
-            <td>{{ ticket.description }}</td>
+            <td> <button mat-button color="primary" (click)="onTicketSelcted(ticket.ticketId)">
+                {{ ticket.title }}
+              </button></td>
             <td>{{ ticketStatus[ticket.status] }}</td>
             <td>{{ ticket.createdAt | age}}</td>
-            <td>{{ ticket.createdByName }}</td>
+            <td>{{getByUserName(ticket.createdByUserId)}}</td>
+            <td>{{ticket.assignedToUserId ? getByUserName(ticket.assignedToUserId):'' }}</td>
+
             <td>{{ ticket.rating || '' }}</td>
 
             <td>

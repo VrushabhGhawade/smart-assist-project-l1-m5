@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MockData } from '../../assets/mock-data';
 import { MatDialog } from '@angular/material/dialog';
 import { Ticket, TicketPriority, TicketStatus } from '../../core/models/ticket.model';
@@ -34,7 +34,8 @@ export class Supervisor {
   filteredTickets: Ticket[] = [];
   constructor(
     private route: ActivatedRoute,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private router: Router
   ) {
     route.queryParams.subscribe(params => {
       this.userId = params['id'];
@@ -85,5 +86,14 @@ export class Supervisor {
     this.selectedFilter = filter;
 
     this.filteredTickets = this.applyFilter(this.userTickets, filter);
+  }
+  onTicketSelcted(ticketId: number) {
+    // Navigate to update the URL when a user selects from dropdown
+    this.router.navigate(['supervisor/track-ticket', ticketId]);
+  }
+
+  getByUserName(userId: string): string {
+    const user = MockData.users.find(u => u.userId === userId);
+    return user ? user.name : '';
   }
 }
