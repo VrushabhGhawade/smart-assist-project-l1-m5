@@ -3,19 +3,21 @@
         <mat-toolbar>Menu</mat-toolbar>
         <mat-nav-list>
             @for (item of getMenusByRole(); track $index) {
-                <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link" >
-                  <div class="item">
-                      <mat-icon>{{ item.icon }}</mat-icon>
+            <a mat-list-item [routerLink]="item.route" routerLinkActive="active-link">
+                <div class="item">
+                    <mat-icon>{{ item.icon }}</mat-icon>
                     <span>{{ item.menuName }}</span>
-                  </div>
-                </a>
+                </div>
+            </a>
             }
         </mat-nav-list>
 
     </mat-drawer>
     <div class="sidenav-content">
         <app-header [version]="version" [isLogin]="true" (menuToggle)="drawer.toggle()"></app-header>
-        <router-outlet></router-outlet>
+        <div class="main-content">
+            <router-outlet></router-outlet>
+        </div>
         <app-footer [develop]="develop"></app-footer>
     </div>
 

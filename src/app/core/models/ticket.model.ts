@@ -13,8 +13,15 @@ export enum TicketStatus {
   Closed = 6,
 
 }
+export enum TicketGroup {
+  All = 'All',
+  New = 'New',
+  Open = 'Open',
+  Closed = 'Closed'
+}
+
 export interface Ticket {
-  ticketId: number;
+  ticketId: any;   // Changed to 'any' to accommodate both string and number IDs
   createdByUserId: string;
   createdByName?: string;
   description: string;
@@ -28,8 +35,15 @@ export interface Ticket {
   title: string;
   category: TicketCategory;
   subCategory: TicketSubCategory;
+  updatedAt?: string;
 }
-
+export interface TicketFormData {
+  issueTitle: string;
+  description: string;
+  priority: TicketPriority;
+  category: TicketCategory;
+  subCategory: TicketSubCategory;
+}
 export class CreateTicketRequest {
   UserId: string | undefined;
   Title: string | undefined;

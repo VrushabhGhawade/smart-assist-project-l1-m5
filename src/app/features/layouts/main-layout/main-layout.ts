@@ -10,7 +10,6 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { Menu } from '../../../core/models/menu.model';
 import { MockData } from '../../../assets/mock-data';
-import { Role } from '../../../core/models/user.model';
 import { PersistentAuthService } from '../../../core/services/persistent-auth';
 
 @Component({

@@ -1,13 +1,13 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 import { PersistentAuthService } from '../services/persistent-auth';
-import { Role } from '../models/user.model';
+import { UserRole } from '../models/user.model';
 
 export const authGuard: CanActivateFn = (route, state) => {
   const authService = inject(PersistentAuthService);
   const router = inject(Router);
 
-  const allowedRoles = route.data?.['roles'] as Role[];
+  const allowedRoles = route.data?.['roles'] as UserRole[];
   if (authService.userDetails != null) {
     const userRole = authService.userDetails?.role;
 

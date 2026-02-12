@@ -1,14 +1,12 @@
 import { Menu } from "../core/models/menu.model";
 import { RoleMenuMapping } from "../core/models/role-menu.model";
-import { Ticket, TicketCategory, TicketStatus, TicketSubCategory } from "../core/models/ticket.model";
+import { Ticket, TicketStatus, TicketCategory, TicketSubCategory } from "../core/models/ticket.model";
 import { User } from "../core/models/user.model";
 
 
 export class MockData {
 
-
   static users: User[] = [
-
     {
       userId: 'U001',
       name: 'Amit Sharma',
@@ -52,7 +50,7 @@ export class MockData {
       password: '12345'
     },
     {
-      userId: 'U004',
+      userId: 'U007',
       name: 'Arjun Malhotra',
       role: 1,
       email: 'arjun.malhotra@smartassist.com',
@@ -78,37 +76,37 @@ export class MockData {
       role: 3,
       email: 'rajiv.khanna@smartassist.com',
       password: '12345'
-
     }
-
   ];
 
   static menus: Menu[] = [
+    // End User Menus (Role 1)
     { menuId: 1, menuName: 'Home', icon: 'home', route: '/user/home' },
     { menuId: 2, menuName: 'Create Ticket', icon: 'add_circle', route: '/user/create-ticket' },
     { menuId: 3, menuName: 'My Tickets', icon: 'confirmation_number', route: '/user/my-ticket' },
     { menuId: 4, menuName: 'Track Ticket', icon: 'track_changes', route: '/user/track-ticket' },
     { menuId: 5, menuName: 'Live Chat', icon: 'chat', route: '/user/live-chat' },
     { menuId: 6, menuName: 'AI Assistant', icon: 'smart_toy', route: '/user/ai-assistant' },
-    //support
+    
+    // Support Engineer Menus (Role 2)
     { menuId: 7, menuName: 'Home', icon: 'home', route: '/support/home' },
     { menuId: 8, menuName: 'My Tickets', icon: 'confirmation_number', route: '/support/support-ticket' },
     { menuId: 9, menuName: 'Track Ticket', icon: 'track_changes', route: '/support/track-ticket' },
     { menuId: 10, menuName: 'Live Chat', icon: 'chat', route: '/support/live-chat' },
     { menuId: 11, menuName: 'AI Assistant', icon: 'smart_toy', route: '/support/ai-assistant' },
-    //addmin
+    
+    // Supervisor Menus (Role 3)
     { menuId: 12, menuName: 'Home', icon: 'home', route: '/supervisor/home' },
-    { menuId: 13, menuName: 'Report', icon: 'confirmation_number', route: '/supervisor/support-ticket' },
+    { menuId: 13, menuName: 'Report', icon: 'assessment', route: '/supervisor/support-ticket' },
     { menuId: 14, menuName: 'Track Ticket', icon: 'track_changes', route: '/supervisor/track-ticket' },
-    { menuId: 15, menuName: 'Live Chat', icon: 'chat', route: '/supervisor/live-chat' },
-
+    { menuId: 15, menuName: 'Live Chat', icon: 'chat', route: '/supervisor/live-chat' }
   ];
 
-  // ROLE ↔ MENU
+  // ROLE ↔ MENU MAPPING
   static roleMenuMapping: RoleMenuMapping[] = [
-    { role: 1, menuIds: [1, 2, 3, 4, 5, 6] },
-    { role: 2, menuIds: [7, 8, 9, 10] },
-    { role: 3, menuIds: [12, 13, 14, 15] }
+    { role: 1, menuIds: [1, 2, 3, 4, 5, 6] },      // End User
+    { role: 2, menuIds: [7, 8, 9, 10, 11] },       // Support Engineer
+    { role: 3, menuIds: [12, 13, 14, 15] }         // Supervisor
   ];
 
   // TICKETS
@@ -122,8 +120,8 @@ export class MockData {
       status: TicketStatus.New,
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.Incident,
-      createdAt: '2026-01-01T10:00:00Z',
-      assignedToUserId: 'U009',
+      createdAt: new Date().toISOString(),
+      assignedToUserId: '',
       rating: 0,
       feedback: ''
     },
@@ -165,7 +163,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.BugDefect,
       createdAt: '2026-01-04T10:00:00Z',
-      assignedToUserId: 'U009',
+      assignedToUserId: '',
       rating: 0,
       feedback: ''
     },
@@ -183,7 +181,6 @@ export class MockData {
       rating: 0,
       feedback: ''
     },
-
     {
       ticketId: 6,
       title: 'Notification missing',
@@ -222,7 +219,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.Incident,
       createdAt: '2026-01-08T10:00:00Z',
-      assignedToUserId: 'U009',
+      assignedToUserId: '',
       rating: 0,
       feedback: ''
     },
@@ -250,11 +247,10 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.Incident,
       createdAt: '2026-01-10T10:00:00Z',
-      assignedToUserId: 'U006',
+      assignedToUserId: 'U008',
       rating: 0,
       feedback: ''
     },
-
     {
       ticketId: 11,
       title: 'Search broken',
@@ -265,7 +261,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.BugDefect,
       createdAt: '2026-01-11T10:00:00Z',
-      assignedToUserId: 'U002',
+      assignedToUserId: '',
       rating: 0,
       feedback: ''
     },
@@ -279,7 +275,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.ServiceRequest,
       createdAt: '2026-01-12T10:00:00Z',
-      assignedToUserId: 'U003',
+      assignedToUserId: 'U008',
       rating: 0,
       feedback: ''
     },
@@ -293,7 +289,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.BugDefect,
       createdAt: '2026-01-13T10:00:00Z',
-      assignedToUserId: 'U004',
+      assignedToUserId: 'U009',
       rating: 0,
       feedback: ''
     },
@@ -307,7 +303,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.Incident,
       createdAt: '2026-01-14T10:00:00Z',
-      assignedToUserId: 'U005',
+      assignedToUserId: 'U008',
       rating: 0,
       feedback: ''
     },
@@ -321,11 +317,10 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.ServiceRequest,
       createdAt: '2026-01-15T10:00:00Z',
-      assignedToUserId: 'U006',
-      rating: 0,
-      feedback: ''
+      assignedToUserId: 'U009',
+      rating: 4,
+      feedback: 'Great job resolving the issue!'
     },
-
     {
       ticketId: 16,
       title: 'OTP delay',
@@ -336,7 +331,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.Incident,
       createdAt: '2026-01-16T10:00:00Z',
-      assignedToUserId: 'U002',
+      assignedToUserId: '',
       rating: 0,
       feedback: ''
     },
@@ -350,7 +345,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.ServiceRequest,
       createdAt: '2026-01-17T10:00:00Z',
-      assignedToUserId: 'U003',
+      assignedToUserId: 'U008',
       rating: 0,
       feedback: ''
     },
@@ -364,7 +359,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.BugDefect,
       createdAt: '2026-01-18T10:00:00Z',
-      assignedToUserId: 'U004',
+      assignedToUserId: 'U009',
       rating: 0,
       feedback: ''
     },
@@ -378,7 +373,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.BugDefect,
       createdAt: '2026-01-19T10:00:00Z',
-      assignedToUserId: 'U005',
+      assignedToUserId: 'U008',
       rating: 0,
       feedback: ''
     },
@@ -392,11 +387,10 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.ServiceRequest,
       createdAt: '2026-01-20T10:00:00Z',
-      assignedToUserId: 'U006',
-      rating: 0,
-      feedback: ''
+      assignedToUserId: 'U009',
+      rating: 5,
+      feedback: 'Excellent work on the email template!'
     },
-
     {
       ticketId: 21,
       title: 'Search delay',
@@ -407,7 +401,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.Incident,
       createdAt: '2026-01-21T10:00:00Z',
-      assignedToUserId: 'U002',
+      assignedToUserId: '',
       rating: 0,
       feedback: ''
     },
@@ -421,7 +415,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.ServiceRequest,
       createdAt: '2026-01-22T10:00:00Z',
-      assignedToUserId: 'U003',
+      assignedToUserId: 'U008',
       rating: 0,
       feedback: ''
     },
@@ -435,7 +429,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.BugDefect,
       createdAt: '2026-01-23T10:00:00Z',
-      assignedToUserId: 'U004',
+      assignedToUserId: 'U009',
       rating: 0,
       feedback: ''
     },
@@ -449,7 +443,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.Incident,
       createdAt: '2026-01-24T10:00:00Z',
-      assignedToUserId: 'U005',
+      assignedToUserId: 'U008',
       rating: 0,
       feedback: ''
     },
@@ -463,11 +457,10 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.ServiceRequest,
       createdAt: '2026-01-25T10:00:00Z',
-      assignedToUserId: 'U006',
-      rating: 0,
-      feedback: ''
+      assignedToUserId: 'U009',
+      rating: 3,
+      feedback: 'Good work on the language translation!'
     },
-
     {
       ticketId: 26,
       title: 'App freeze',
@@ -478,7 +471,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.BugDefect,
       createdAt: '2026-01-26T10:00:00Z',
-      assignedToUserId: 'U002',
+      assignedToUserId: '',
       rating: 0,
       feedback: ''
     },
@@ -492,7 +485,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.ServiceRequest,
       createdAt: '2026-01-27T10:00:00Z',
-      assignedToUserId: 'U003',
+      assignedToUserId: 'U008',
       rating: 0,
       feedback: ''
     },
@@ -506,7 +499,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.Incident,
       createdAt: '2026-01-28T10:00:00Z',
-      assignedToUserId: 'U004',
+      assignedToUserId: 'U009',
       rating: 0,
       feedback: ''
     },
@@ -520,7 +513,7 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.ServiceRequest,
       createdAt: '2026-01-29T10:00:00Z',
-      assignedToUserId: 'U005',
+      assignedToUserId: 'U008',
       rating: 0,
       feedback: ''
     },
@@ -534,10 +527,9 @@ export class MockData {
       category: TicketCategory.Technical,
       subCategory: TicketSubCategory.ServiceRequest,
       createdAt: '2026-01-30T10:00:00Z',
-      assignedToUserId: 'U006',
+      assignedToUserId: 'U009',
       rating: 5,
-      feedback: 'good'
+      feedback: 'Excellent service!'
     }
   ];
-
 }

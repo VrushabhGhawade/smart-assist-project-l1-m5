@@ -1,7 +1,7 @@
 import { Routes } from '@angular/router';
-import { LiveChat } from '../user/live-chat/live-chat';
+import { LiveChat } from '../live-chat/live-chat';
 import { Supervisor } from './supervisor';
-import { TrackTicket } from '../user/track-ticket/track-ticket';
+import { TrackTicket } from '../track-ticket/track-ticket';
 
 
 export const supervisorRoutes: Routes = [
