@@ -1,18 +1,123 @@
 <div class="manual-container">
   <mat-card class="manual-card">
-
+ 
     <!-- Title -->
-    <h1>Project Folder Structure – L1M5</h1>
+    <h1>Resources (L1 M5)</h1>
     <mat-divider></mat-divider>
-
-    <!-- Project Structure -->
-    <section>
-      <p>
-        The application now follows a <b>feature-based, scalable, and role-driven architecture</b>.
-        Each module is isolated, reusable, and maintainable for enterprise-level growth.
-      </p>
-
-      <pre class="project-structure">
+ 
+    <mat-tab-group class="manual-tabs" animationDuration="0ms" mat-stretch-tabs="true" dynamicHeight>
+      <!-- Tab 1: Requirement -->
+      <mat-tab label="Requirement">
+        <div class="requirement-area">
+          <div class="cards-grid">
+            @for (card of requirementCards; track card.title) {
+              <mat-card class="step-card">
+                <div class="step-header">
+                  <div class="step-badge">{{ card.step }}</div>
+                  <div class="step-title">{{ card.title }}</div>
+                </div>
+                <mat-card-content>
+                  <div class="step-split">
+                    <div class="step-block">
+                      <h3>Technical Requirements</h3>
+                      <ul>
+                        <li *ngFor="let t of card.technical">{{ t }}</li>
+                      </ul>
+                    </div>
+ 
+                    <div class="step-block">
+                      <h3>Functional Requirements</h3>
+                      <ul>
+                        <li *ngFor="let f of card.functional">{{ f }}</li>
+                      </ul>
+                    </div>
+                  </div>
+                </mat-card-content>
+              </mat-card>
+            }
+          </div>
+        </div>
+      </mat-tab>
+ 
+      <!-- Tab 2: Tips -->
+      <mat-tab label="Tips">
+        <section>
+          <p>
+            Quick reference for L1M5 implementation and review.
+          </p>
+ 
+          <h3>1) Mock Data</h3>
+          <ul>
+            <li>Maintain all test data in one place: <code>src/app/assets/mock-data.ts</code> (Users, Menus, Role↔Menu, Tickets).</li>
+            <li>When you add a new menu item, update both <b>menus</b> and <b>roleMenuMapping</b> so it appears for the correct roles.</li>
+            <li>Keep mock data aligned with the interfaces in <code>src/app/core/models/</code> (avoid ad-hoc shapes).</li>
+          </ul>
+ 
+          <h3>2) Login &amp; Navigation Flow</h3>
+          <ul>
+            <li>Login should validate using <b>email + password</b> from mock users, then navigate based on role.</li>
+            <li>When routing to dashboards/features, keep navigation predictable and role-driven (avoid hard-coded role checks scattered across templates).</li>
+            <li>If a screen needs user context (name/role), ensure the state is available via a shared service (Observable/BehaviorSubject pattern) or via route params/query params consistently.</li>
+          </ul>
+ 
+          <h3>3) Create Ticket (/create-ticket)</h3>
+          <ul>
+            <li>Use a <b>Reactive Form</b> with mandatory fields: Title, Description, Priority, Category, Sub-Category.</li>
+            <li>Add <b>required</b> validation and show clear error messages on touched/dirty fields.</li>
+            <li>Disable <b>Submit</b> while the form is invalid.</li>
+            <li>After successful submit, navigate programmatically to <code>/track-ticket/:ticketId</code>.</li>
+            <li>Use Angular Material inputs: <code>MatInput</code>, <code>MatSelect</code>, <code>MatButton</code>.</li>
+          </ul>
+ 
+          <h3>4) My Tickets (/my-tickets)</h3>
+          <ul>
+            <li>Display the ticket list using <b>MatTable</b> and bind the list from mock data (service-driven).</li>
+            <li><b>End User</b>: show only tickets where <code>createdByUserId</code> matches the logged-in user.</li>
+            <li><b>Support Engineer</b>: show assigned tickets + new/unassigned tickets.</li>
+            <li><b>Supervisor</b>: show all tickets.</li>
+            <li>Clicking a ticket should navigate to <code>/track-ticket/:ticketId</code>.</li>
+          </ul>
+ 
+          <h3>5) Track Ticket (/track-ticket, /track-ticket/:ticketId)</h3>
+          <ul>
+            <li>Support both routes: <code>/track-ticket</code> and <code>/track-ticket/:ticketId</code>.</li>
+            <li>Read <code>ticketId</code> from route params; if present, auto-select the ticket in the dropdown.</li>
+            <li>Dropdown should only show relevant tickets (role-based filtering).</li>
+            <li>Use a form control for dropdown selection and conditionally render details based on current selection.</li>
+          </ul>
+ 
+          <h3>6) Guards, Roles, and Menus</h3>
+          <ul>
+            <li>Implement route guards and role checks using mock user data; block unauthorized access.</li>
+            <li>Protect routes based on role, and conditionally show menu items based on role↔menu mapping.</li>
+            <li>Keep routing meaningful and consistent (menu-based routing + programmatic navigation where needed).</li>
+          </ul>
+ 
+          <h3>7) Live Chat (/live-chat) &amp; Reports (/reports)</h3>
+          <ul>
+            <li><b>Live Chat</b>: route exists, navigates from menu, shows role-based placeholder text only (no chat functionality).</li>
+            <li><b>Reports</b>: route exists, navigates from menu, restricted to Supervisor, placeholder message only.</li>
+          </ul>
+ 
+          <h3>8) Architecture &amp; Quick Checks</h3>
+          <ul>
+            <li>Prefer <b>separation of concerns</b>: filtering + business logic in services; components remain thin.</li>
+            <li>Prefer streams: services return <code>Observable&lt;...&gt;</code>; templates render via AsyncPipe when applicable.</li>
+            <li>Validate routes/params work, and role-based ticket visibility is correct for each role.</li>
+            <li>Keep a feature-based folder structure and avoid cross-feature coupling.</li>
+          </ul>
+        </section>
+ 
+        <section>
+          <h2>Project Folder Structure – L1M5</h2>
+          <mat-divider></mat-divider>
+ 
+          <p>
+            The application now follows a <b>feature-based, scalable, and role-driven architecture</b>.
+            Each module is isolated, reusable, and maintainable for enterprise-level growth.
+          </p>
+ 
+          <pre class="project-structure">
 src/
  └── app/
      ├── core/
@@ -48,56 +153,93 @@ src/
      ├── app.routes.ts
      ├── app.component.ts
      └── app.config.ts
-      </pre>
-
-      <ul>
-        <li><b>Core</b>: Shared components, services, guards, and models used across the app</li>
-        <li><b>Services</b>: Centralized business logic and API/data handling</li>
-        <li><b>Guards</b>: Role-based access control and route protection</li>
-        <li><b>Features</b>: Independent business modules (Login, Dashboard, Tickets, Manual, etc.)</li>
-        <li><b>Layouts</b>: Separate layouts for authentication and main application UI</li>
-        <li><b>Routing</b>: Centralized routing with lazy loading and guards</li>
-      </ul>
-    </section>
-
-    <!-- Improvements in L1M5 -->
-    <section>
-      <h2>Enhancements in L1M5</h2>
-      <mat-divider></mat-divider>
-
-      <ul>
-        <li>Implemented <b>Role-Based Route Guards</b> (Supervisor, Support Engineer, User)</li>
-        <li>Added <b>Track Ticket</b> feature with dynamic routing</li>
-        <li>Improved <b>Reactive state management using RxJS</b></li>
-        <li>Centralized <b>shared services</b> for better maintainability</li>
-        <li>Reduced component complexity (thin components pattern)</li>
-        <li>Better <b>scalability & clean architecture</b></li>
-      </ul>
-    </section>
-
-    <!-- External Resources -->
-    <section>
-      <h2>External Resources</h2>
-      <mat-divider></mat-divider>
-
-      <ul>
-        <li>
-          <a href="https://angular.io/docs" target="_blank" rel="noopener noreferrer">
-            Angular Documentation
-          </a>
-        </li>
-        <li>
-          <a href="https://material.angular.io/components/categories" target="_blank" rel="noopener noreferrer">
-            Angular Material Components
-          </a>
-        </li>
-        <li>
-          <a href="https://rxjs.dev/guide/overview" target="_blank" rel="noopener noreferrer">
-            RxJS Documentation
-          </a>
-        </li>
-      </ul>
-    </section>
-
+          </pre>
+ 
+          <ul>
+            <li><b>Core</b>: Shared components, services, guards, and models used across the app</li>
+            <li><b>Services</b>: Centralized business logic and API/data handling</li>
+            <li><b>Guards</b>: Role-based access control and route protection</li>
+            <li><b>Features</b>: Independent business modules (Login, Dashboard, Tickets, Manual, etc.)</li>
+            <li><b>Layouts</b>: Separate layouts for authentication and main application UI</li>
+            <li><b>Routing</b>: Centralized routing with lazy loading and guards</li>
+          </ul>
+        </section>
+ 
+        <section>
+          <h2>Enhancements in L1M5</h2>
+          <mat-divider></mat-divider>
+ 
+          <ul>
+            <li>Implemented <b>Role-Based Route Guards</b> (Supervisor, Support Engineer, User)</li>
+            <li>Added <b>Track Ticket</b> feature with dynamic routing</li>
+            <li>Improved <b>Reactive state management using RxJS</b></li>
+            <li>Centralized <b>shared services</b> for better maintainability</li>
+            <li>Reduced component complexity (thin components pattern)</li>
+            <li>Better <b>scalability & clean architecture</b></li>
+          </ul>
+        </section>
+ 
+        <section>
+          <h2>External Resources</h2>
+          <mat-divider></mat-divider>
+          <ul>
+            <li>
+              <a href="https://angular.io/docs" target="_blank" rel="noopener noreferrer">
+                Angular Documentation
+              </a>
+            </li>
+            <li>
+              <a href="https://material.angular.io/components/categories" target="_blank" rel="noopener noreferrer">
+                Angular Material Components
+              </a>
+            </li>
+            <li>
+              <a href="https://rxjs.dev/guide/overview" target="_blank" rel="noopener noreferrer">
+                RxJS Documentation
+              </a>
+            </li>
+          </ul>
+        </section>
+      </mat-tab>
+ 
+      <!-- Tab 3: Test Data -->
+      <mat-tab label="Test Data">
+        <section>
+          <p>
+            These are the mock datasets driving the UI.
+          </p>
+ 
+          <h3>Users</h3>
+          <pre>{{ mockUsers | json }}</pre>
+ 
+          <h3>Menus</h3>
+          <pre>{{ mockMenus | json }}</pre>
+ 
+          <h3>Role ↔ Menu Mapping</h3>
+          <pre>{{ mockRoleMenuMapping | json }}</pre>
+ 
+          <h3>Tickets</h3>
+          <pre>{{ mockTickets | json }}</pre>
+        </section>
+      </mat-tab>
+ 
+      <!-- Tab 4: Evaluation Parameter -->
+      <mat-tab label="Evaluation Parameter">
+        <section>
+          <p>
+            Checklist for review. Your selections <b>auto-save</b> in this browser.
+          </p>
+ 
+          <div class="evaluation-list">
+            @for (item of evaluationItems; track item.id) {
+              <mat-checkbox [checked]="item.checked" (change)="onEvaluationToggle(item, $event.checked)">
+                {{ item.label }}
+              </mat-checkbox>
+            }
+          </div>
+        </section>
+      </mat-tab>
+    </mat-tab-group>
+ 
   </mat-card>
 </div>
